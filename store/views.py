@@ -565,9 +565,9 @@ def payments(request):
         'user': request.user,
         'order': order,
     })
-    to_email = request.user.email
-    send_email = EmailMessage(mail_subject, message, to=[to_email])
-    send_email.send()
+    # to_email = request.user.email
+    # send_email = EmailMessage(mail_subject, message, to=[to_email])
+    # send_email.send()
 
     data = {
         'order_number': order.order_number,
