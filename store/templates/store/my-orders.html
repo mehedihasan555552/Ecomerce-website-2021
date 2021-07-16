@@ -1,0 +1,80 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg">
+
+<div class="container">
+	<div class="row">
+	<aside class="col-md-3">
+		<!--   SIDEBAR   -->
+		<ul class="list-group">
+			<a class="list-group-item {% if '/dashboard/' == request.path %}active{% endif %}" href="{% url 'dashboard'%}"> Dashboard </a>
+			<a class="list-group-item {% if '/my_orders/' == request.path %}active{% endif %}"  href="{% url 'my_orders'%}"> My Orders </a>
+			<a class="list-group-item {% if '/edit_profile/' == request.path %}active{% endif %}" href="{% url 'edit_profile'%}"> Edit Profile </a>
+			<a class="list-group-item {% if '/change_password/' == request.path %}active{% endif %}" href="{% url 'change_password'%}">Change Password </a>
+			
+			
+		</ul>
+		<br>
+		<a class="btn btn-light btn-block" href="{% url 'logout'%}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
+		<!--   SIDEBAR .//END   -->
+	</aside>
+	<main class="col-md-9">
+		<article class="card">
+		<header class="card-header">
+			<strong class="d-inline-block mr-3">Your Order History</strong>
+			
+		</header>
+
+
+		<div class="card-body">
+			<div class="row"> 
+				<div class="col-md-12">
+					<table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">Order</th>
+                            <th scope="col">Billing Name</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Order Total</th>
+                            <th scope="col">Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr>
+                              <th scope="row"><a href="{% url 'order_detail' order.order_number %}">#{{order.order_number}}</a></th>
+                              <td>{{order.full_name}}</td>
+                              <td>{{order.phone}}</td>
+                              <td>${{order.order_total}}</td>
+                              <td>{{order.created_at}}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                          </tbody>
+                        
+                      </table>
+				</div>
+
+				
+
+
+			</div> <!-- row.// -->
+		</div> <!-- card-body .// -->
+
+		
+		
+		</article> <!-- order-group.// --> 
+	</main>
+</div> <!-- row.// -->
+</div>
+
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}
